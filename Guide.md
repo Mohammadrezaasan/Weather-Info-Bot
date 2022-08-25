@@ -8,7 +8,8 @@
 
 # 🕥How to get hourly daily forecast 🕥
 
-![FullSizeRender 4](https://user-images.githubusercontent.com/108104864/186505793-3f0cc524-c4c4-4601-8236-1385a3d2631e.gif)
+![FullSizeRender 7](https://user-images.githubusercontent.com/108104864/186692145-b793a1dc-2bf8-4716-adad-a5ca9f5cfa40.gif)
+
 
 # 🌌 How to get day and night times 🌄
 
