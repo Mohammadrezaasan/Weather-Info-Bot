@@ -1,3 +1,6 @@
+<img src="https://user-images.githubusercontent.com/108104864/186504202-ff71dacf-1c9b-42a7-9491-a8f342302f4e.gif" width="250" height="500"/>
+
+
 # 🌦 How to get current weather conditions 🌦
 
 ![FullSizeRender](https://user-images.githubusercontent.com/108104864/186504202-ff71dacf-1c9b-42a7-9491-a8f342302f4e.gif)
