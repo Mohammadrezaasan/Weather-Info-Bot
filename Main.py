@@ -1,4 +1,3 @@
-from queue import Empty
 from turtle import title
 from telebot import TeleBot
 import telebot
