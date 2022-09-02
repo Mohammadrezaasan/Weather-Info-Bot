@@ -6,7 +6,7 @@
 </p>
 
 <p align="left">
-<img src="https://user-images.githubusercontent.com/108104864/186504202-ff71dacf-1c9b-42a7-9491-a8f342302f4e.gif" width="250" height="500"/>
+<img src="https://user-images.githubusercontent.com/108104864/186504202-ff71dacf-1c9b-42a7-9491-a8f342302f4e.gif" width="150" height="300"/>
 
 </p><p align="center">
   ⏳ How to get daily Forecast ⏳ 
