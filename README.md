@@ -48,16 +48,16 @@ def handle_text(message):
 
             global city_name
             city_name = message.text.replace('the name of the desired city','')
-            city_name =  city_name.replace(":","")
+            city_name =  city_name.replace(":","") # In this section, using the city name variable, we set the city name entered by the user = city name variable.
             city_name_test = city_name.replace(" ","")
             city_name_test = city_name_test[0] , city_name_test[1]
-            if city_name_test[0]  not in Alphabet :
+            if city_name_test[0]  not in Alphabet : # In this section, we check that the first two letters of the city name match the English alphabet and that the city name is not smaller than two letters.
                 bot.reply_to(message,"The city name was not registered successfully ❌")
            
             elif city_name_test[1] not in Alphabet : 
                 bot.reply_to(message,"The city name was not registered successfully ❌")
 
-            elif city_name_test[0] in Alphabet : 
+            elif city_name_test[0] in Alphabet : # In this section, we also check that if the first letter of the city name is in the English alphabet, save the city name and go to the next step.
                 chat_id = message.chat.id 
                 markup = telebot.types.ReplyKeyboardMarkup(True, False)
                 markup.row("🤖 Introducing The Robot 🤖")
