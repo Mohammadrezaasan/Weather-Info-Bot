@@ -1,3 +1,4 @@
+from queue import Empty
 from turtle import title
 from telebot import TeleBot
 import telebot
@@ -8,32 +9,52 @@ import requests
 import json
 from decimal import *
 from weather_info_config import*
+from telegram import ParseMode
+from telegram import Bot
 "----------------------------------------------------------------------------------------------------------"
 bot = telebot.TeleBot(Token_bot)
 url = "https://weatherapi-com.p.rapidapi.com/forecast.json"
+telegram="https://api.telegram.org/bot<token>/sendMessage?chat_id=<id>&text=Hi! `Press me!`&parse_mode=MarkDown"
 "----------------------------------------------------------------------------------------------------------"
 @bot.message_handler(commands=['start'])
 def handle_start(message):
    chat_id = message.chat.id 
+   text="`"+"The name of the desired city : "+"`" 
    markup = telebot.types.ReplyKeyboardMarkup(True, False)
    markup.row("🔴 First, enter the name of your desired city as in the example below 🔴")
    markup.row('The name of the desired city : London')
-   bot.send_message(chat_id,'Hello 🙋🏻‍♂️\nwelcome to the Weather Info Bot 👾 ', reply_markup=markup)
+   bot.send_message(chat_id,'Hello 🙋🏻‍♂️\nwelcome to the Weather Info Bot 👾 '+'\n🔴🔴 IMPORTANT 🔴🔴\nTo enter the name of your desired city, click on the text below and add the name of your desired city to the end of the text.',reply_markup=markup)
+   bot.send_message(chat_id,text,parse_mode='MarkdownV2')
+
+
 "----------------------------------------------------------------------------------------------------------"
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
     message.text = message.text.lower()
-    if 'the name of the desired city' in message.text :
-        global city_name
-        city_name = message.text.replace('the name of the desired city','')
-        city_name =  city_name.replace(":","")
-        chat_id = message.chat.id 
-        markup = telebot.types.ReplyKeyboardMarkup(True, False)
-        markup.row("🤖 Introducing The Robot 🤖")
-        markup.row('🗝 click here to find out what each keyword does 🗝')
-        markup.row('📓 click here to open the list of keywords for you 📓')
-        markup.row('🔄 Changing the name of the city 🔄')
-        bot.send_message(chat_id,'The name of the city was successfully registered ✅', reply_markup=markup)
+    if  'the name of the desired city' in message.text :
+        try:
+
+            global city_name
+            city_name = message.text.replace('the name of the desired city','')
+            city_name =  city_name.replace(":","")
+            city_name_test = city_name.replace(" ","")
+            city_name_test = city_name_test[0] , city_name_test[1]
+            if city_name_test[0]  not in Alphabet :
+                bot.reply_to(message,"The city name was not registered successfully ❌")
+           
+            elif city_name_test[1] not in Alphabet : 
+                bot.reply_to(message,"The city name was not registered successfully ❌")
+
+            elif city_name_test[0] in Alphabet : 
+                chat_id = message.chat.id 
+                markup = telebot.types.ReplyKeyboardMarkup(True, False)
+                markup.row("🤖 Introducing The Robot 🤖")
+                markup.row('🗝 click here to find out what each keyword does 🗝')
+                markup.row('📓 click here to open the list of keywords for you 📓')
+                markup.row('🔄 Changing the name of the city 🔄')
+                bot.send_message(chat_id,"The city name was successfully registered ✅\nCity Name :"+city_name.title(),reply_markup=markup)
+        except: 
+            bot.reply_to(message,"The city name was not registered successfully ❌")
     
     elif message.text == "🤖 introducing the robot 🤖" :
         bot.reply_to(message,"Hello, my name is Weather Info bot. I can give you the current weather information and also have the ability to predict the weather for the next two days.☀️🌦⌚️\nI also have another feature that you can use to find out the local time of the desired location.🌎🕑")
@@ -274,19 +295,30 @@ def handle_text(message):
             bot.reply_to(message,'🔴🔴 Make sure the city name you entered is correct 🔴🔴')
     
     elif  message.text =='🔄 changing the name of the city 🔄': 
-        bot.reply_to(message,"🔴 To change the desired city name, type as in the example below 🔴\nThe name of the new city : Monaco")
-
-    elif 'the name of the new city' in message.text : 
-        update_city_name = message.text.replace("the name of the new city",'')
-        update_city_name = update_city_name.replace(":",'')
-        city_name = update_city_name
-        if city_name == update_city_name : 
-            bot.reply_to(message,'The name change was done successfully ✅')
+        chat_id = message.chat.id
+        text = "`" +"The name of the new city : "+ "`"
+        bot.reply_to(message,"🔴🔴 IMPORTANT 🔴🔴\nTo change the name of the desired city,click on the text below and paste it and add the name of the desired city to the end of the text.")
+        bot.send_message(chat_id,text,parse_mode='MarkdownV2')
         
+    
+    elif  'the name of the new city' in message.text :
+            try:
+                update_city_name = message.text.replace("the name of the new city","")
+                update_city_name = update_city_name.replace(":","")
+                city_name = update_city_name
+                city_name_test_v2 = city_name.replace(" ","")
+                city_name_test_v2 = city_name_test_v2[0] , city_name_test_v2[1]
+                if city_name_test_v2[0]  not in Alphabet :
+                    bot.reply_to(message,"Rename was failed ❌")
+            
+                elif city_name_test_v2[1] not in Alphabet : 
+                    bot.reply_to(message,"Rename was failed ❌")
 
-
-
-
-
+                elif city_name_test_v2[0] in Alphabet : 
+                   
+                    bot.reply_to(message,"Rename was successfully ✅\nNew City Name : "+city_name.title())
+            except: 
+                bot.reply_to(message,"Rename was failed ❌")
+        
 "----------------------------------------------------------------------------------------------------------"
 bot.polling(none_stop=True)
