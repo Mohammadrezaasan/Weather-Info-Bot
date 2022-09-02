@@ -13,7 +13,6 @@ from telegram import Bot
 "----------------------------------------------------------------------------------------------------------"
 bot = telebot.TeleBot(Token_bot)
 url = "https://weatherapi-com.p.rapidapi.com/forecast.json"
-telegram="https://api.telegram.org/bot<token>/sendMessage?chat_id=<id>&text=Hi! `Press me!`&parse_mode=MarkDown"
 "----------------------------------------------------------------------------------------------------------"
 @bot.message_handler(commands=['start'])
 def handle_start(message):
