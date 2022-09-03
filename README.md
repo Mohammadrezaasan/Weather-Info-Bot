@@ -1,5 +1,6 @@
-# <p align="center">🌦 Welcome To Weather Info Bot 🌦
- 
+
+ # <p align="center"> 🌦 Welcome To Weather Info Bot 🌦
+
  [![Supported Python versions](https://img.shields.io/pypi/pyversions/pyTelegramBotAPI.svg)](https://pypi.python.org/pypi/pyTelegramBotAPI)
 
 <p align="center">A simple and convenient robot that tells you the weather with a few clicks <a href="https://t.me/tester_mohammadreza_asan1_bot">Weather Info Bot</a>.</p>
@@ -119,6 +120,32 @@ def handle_text(message):
         except : 
             bot.reply_to(message,'🔴🔴 Make sure the city name you entered is correct 🔴🔴')
 
+ ```
+ * The following code is used to get the daily forecast
+ ```
+ elif message.text in select_day_for_daily_forecast : 
+        global answer_choose_the_day_of_the_daily_forecast
+        answer_choose_the_day_of_the_daily_forecast = message.text 
+        try :
+            querystring = {"q":city_name,"days":"3"}
+
+            headers = {
+         "X-RapidAPI-Key": RapidAPI_Key,
+         "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com"
+        }
+
+            response = requests.request("GET", url, headers=headers, params=querystring)
+
+            information_received = json.loads(response.text)
+            location = information_received["location"]
+            forecast = information_received['forecast']["forecastday"][select_day_for_daily_forecast[answer_choose_the_day_of_the_daily_forecast]]['day']
+            condition = forecast['condition']
+            date1 = information_received['forecast']["forecastday"][select_day_for_daily_forecast[answer_choose_the_day_of_the_daily_forecast]]
+                        
+
+            bot.reply_to(message,'Country Name 🌎 : '+location['country']+'\nRegion 🗺 : '+location['region']+'\nCity Name 🏙 : '+location['name']+"\n------------------------------------------------------"+'\nForecast Date 🗓 : '+str(date1['date'])+'\n'+condition['text']+' '+the_name_of_each_day[answer_choose_the_day_of_the_daily_forecast]+' '+sticker[condition['text']]+"\n"+the_name_of_each_day[answer_choose_the_day_of_the_daily_forecast]+"'s Maximum Temperature 🌡 : "+str(forecast['maxtemp_c'])+'°C'+"\n"+the_name_of_each_day[answer_choose_the_day_of_the_daily_forecast]+"'s Minimum Temperature 🌡 : "+str(forecast['mintemp_c'])+'°C'+"\n"+the_name_of_each_day[answer_choose_the_day_of_the_daily_forecast]+"'s Average Temperature 🌡 : "+str(forecast['avgtemp_c'])+"°C"+"\n"+the_name_of_each_day[answer_choose_the_day_of_the_daily_forecast]+"'s Maximum Temperature 🌡 : "+str(forecast['maxtemp_f'])+'°F'+"\n"+the_name_of_each_day[answer_choose_the_day_of_the_daily_forecast]+"'s Minimum Temperature 🌡 : "+str(forecast['mintemp_f'])+'°F'+"\n"+the_name_of_each_day[answer_choose_the_day_of_the_daily_forecast]+"'s Average Temperature 🌡 : "+str(forecast['avgtemp_f'])+'°F'+'\nMaximum Wind Speed 🌬 : '+str(forecast['maxwind_kph'])+'KPH'+'\nMaximum Wind Speed 🌬 : '+str(forecast['maxwind_mph'])+'MPH'+'\nAverage Visibility 🛣 : '+str(forecast['avgvis_km'])+'KM'+'\nAverage Visibility 🛣 : '+str(forecast['avgvis_miles'])+'MPH'+'\nAverage Humidity 💧 : '+str(forecast['avghumidity'])+'%'+"\nWill It Rain "+the_name_of_each_day[answer_choose_the_day_of_the_daily_forecast]+' 🌧 : '+yes_or_no[str(forecast["daily_will_it_rain"])]+'\nChance Of Rain '+the_name_of_each_day[answer_choose_the_day_of_the_daily_forecast]+' 🌧 : '+str(forecast['daily_chance_of_rain'])+'%'+"\nWill It Snow "+the_name_of_each_day[answer_choose_the_day_of_the_daily_forecast]+' 🌨 : '+yes_or_no[str(forecast["daily_will_it_snow"])]+'\nChance Of Snow '+the_name_of_each_day[answer_choose_the_day_of_the_daily_forecast]+' 🌨 : '+str(forecast['daily_chance_of_snow'])+'%'+'\nTotal Precipitation 🌧 : '+str(forecast['totalprecip_mm'])+'MM'+'\nTotal Precipitation 🌧 : '+str(forecast['totalprecip_in'])+'Inches')                                                        
+        except : 
+            bot.reply_to(message,'🔴🔴 Make sure the city name you entered is correct 🔴🔴')
  ```
  
  
