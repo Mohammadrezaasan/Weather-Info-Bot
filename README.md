@@ -10,9 +10,9 @@
 ## Getting started
 
 
-* To start the project, we need to build a robot that was built with the help of the <a href="https://t.me/BotFather">Bot Father</a> :
+* To start the project, we need to build a robot that was built with the help of the <a href="https://t.me/BotFather">Bot Father</a> 
 
-* When your bot is built, the Bot Father will give you a token at the end { You put that token in the token variable in the config file } :
+* When your bot is built, the Bot Father will give you a token at the end { You put that token in the token variable in the config file } 
 
 ```
 bot = telebot.TeleBot(Token_bot)
@@ -123,8 +123,8 @@ def handle_text(message):
  ```
  * The following code is used to get the daily forecast
  ```
- elif message.text in select_day_for_daily_forecast : 
-        global answer_choose_the_day_of_the_daily_forecast
+ elif message.text in select_day_for_daily_forecast : # In this section, we want to use the variables that we created in the config file { Here we use the keywords that we have prepared and the user enters them to determine the forecast day and we translate them using the dictionary method }
+        global answer_choose_the_day_of_the_daily_forecast 
         answer_choose_the_day_of_the_daily_forecast = message.text 
         try :
             querystring = {"q":city_name,"days":"3"}
@@ -147,8 +147,51 @@ def handle_text(message):
         except : 
             bot.reply_to(message,'🔴🔴 Make sure the city name you entered is correct 🔴🔴')
  ```
+ * The following code is for setting the hourly forecast day and displaying the list of forecast hours
+ ```
+     elif message.text in select_day_for_hourly_forecast : 
+        global hour4
+        hour4 = message.text
+        chat_id = message.chat.id 
+        markup = telebot.types.ReplyKeyboardMarkup(True,False)
+        markup.row('00:00','01:00','02:00','03:00')
+        markup.row('04:00','05:00','06:00','07:00')
+        markup.row('08:00','09:00','10:00','11:00')
+        markup.row('12:00','13:00','14:00','15:00')
+        markup.row('16:00','17:00','18:00','19:00')
+        markup.row('20:00','21:00','22:00','23:00')
+        markup.row('Return to main page ↩️','Return to the hourly daily forecast page 🔙')
+        bot.send_message(chat_id,'‼️ Select one of the following hours and you will receive the weather forecast for that hour according to the selected time frame ‼️',reply_markup=markup)
+      
+ ```
  
- 
+ * The following code is used to get the hourly forecast
+ ```
+     elif message.text in choose_an_hour : 
+        try :
+
+            hour2 = message.text
+            
+            querystring = {"q":city_name,"days":"3"}
+
+            headers = {
+         "X-RapidAPI-Key": RapidAPI_Key,
+         "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com"
+        }
+
+            response = requests.request("GET", url, headers=headers, params=querystring)
+
+            information_received = json.loads(response.text)
+            location = information_received["location"]
+            forecast = information_received['forecast']["forecastday"][select_day_for_hourly_forecast[hour4]]['hour'][choose_an_hour[hour2]]
+            condition = forecast['condition']
+            location = information_received["location"]
+            date1 = information_received['forecast']["forecastday"][select_day_for_hourly_forecast[hour4]]            
+
+            bot.reply_to(message,'Country Name 🌎 : '+location['country']+'\nRegion 🗺 : '+location['region']+'\nCity Name 🏙 : '+location['name']+"\n------------------------------------------------------"+'\nForecast Date 🗓 : '+str(date1['date'])+'\n'+condition['text']+' At '+hour2+' '+sticker[condition['text']]+"\nTemperature 🌡 : "+str(forecast['temp_c'])+"°C"+"\nFeels Like 🚻 : "+str(forecast['feelslike_c'])+"°C"+"\nThe Heat We Feel ♨️ : "+str(forecast['heatindex_c'])+'°C'+"\nTemperature 🌡 : "+str(forecast['temp_f'])+"°F"+"\nFeels Like 🚻 : "+str(forecast['feelslike_f'])+"°F"+"\nThe Heat We Feel ♨️ : "+str(forecast['heatindex_f'])+'°F'+"\nWind Speed At "+hour2+" 🌬 : "+str(forecast['wind_kph'])+"KPH"+"\nWind Speed At "+hour2+" 🌬 : "+str(forecast['wind_mph'])+"MPH"+"\nWind Temperature 🌡 : "+str(forecast['windchill_c'])+'°C'+"\nWind Temperature 🌡: "+str(forecast['windchill_f'])+'°F'+"\nWind Direction 🧭 : "+str(forecast["wind_dir"])+"\nPressure In Inches 🛫 : "+str(forecast["pressure_in"])+"\nWill It Rain "+the_name_of_each_day_2[hour4]+' At '+hour2+' 🌧 : '+yes_or_no[str(forecast["will_it_rain"])]+'\nChance Of Rain '+the_name_of_each_day_2[hour4]+' At '+hour2+' 🌧 : '+str(forecast['chance_of_rain'])+'%'+"\nPrecipitation Amount 🌧 : "+str(forecast['precip_mm'])+"MM"+"\nPrecipitation Amount 🌧 : "+str(forecast['precip_in'])+"Inches"+"\nWill It Snow "+the_name_of_each_day_2[hour4]+" At "+hour2+' 🌨 : '+yes_or_no[str(forecast["will_it_snow"])]+'\nChance Of Snow '+the_name_of_each_day_2[hour4]+' At '+hour2+' 🌨 : '+str(forecast['chance_of_snow'])+'%')                                                                                                                                                                
+        except : 
+            bot.reply_to(message,'🔴🔴 Make sure the city name you entered is correct 🔴🔴')
+ ```
  
  
  
