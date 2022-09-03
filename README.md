@@ -1,4 +1,5 @@
 # <p align="center">🌦 Welcome To Weather Info Bot 🌦
+ 
  [![Supported Python versions](https://img.shields.io/pypi/pyversions/pyTelegramBotAPI.svg)](https://pypi.python.org/pypi/pyTelegramBotAPI)
 
 <p align="center">A simple and convenient robot that tells you the weather with a few clicks <a href="https://t.me/tester_mohammadreza_asan1_bot">Weather Info Bot</a>.</p>
@@ -41,7 +42,7 @@ def handle_start(message):
 def handle_text(message):
     message.text = message.text.lower() # In this section, we convert all the messages entered by the user into lowercase letters so that they don't have problems, and we write our codes according to the standard.
  ```
- * The following code is used to get the city name from the user
+ * The following code is used to get the city name from the user 
  ```
      if  'the name of the desired city' in message.text :
         try:
@@ -69,7 +70,56 @@ def handle_text(message):
             bot.reply_to(message,"The city name was not registered successfully ❌")
  ```
  
- 
+ * The following code is used to get the current weather condition 
+ ```
+ elif message.text == "🌦 click here to get current weather conditions 🌦" :
+        try :
+            querystring = {"q":city_name,"days":"3"} # In this section, the city name was entered by the user in the city name field, we saved it as a value in the city name variable and placed it as the city name.
+
+            headers = {
+	     "X-RapidAPI-Key": RapidAPI_Key,
+	     "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com"
+         }
+
+            response = requests.request("GET", url, headers=headers, params=querystring)
+
+            information_received = json.loads(response.text) # And in this part, we sort the information we obtained after the request with the help of json
+            current = information_received["current"]
+            location = information_received["location"]
+            condition = current['condition']
+    
+            # In this section, we edit the information we have obtained  
+            bot.reply_to(message,'Country Name 🌎 : '+location['country']+'\nRegion 🗺 : '+location['region']+'\nCity Name 🏙 : '+location['name']+"\n------------------------------------------------------"+'\nLocal Time ⌚️ : '+location['localtime'].split()[1]+'\nCalendar 🗓 : '+location['localtime'].split()[0]+'\nLatest update on local time ⌚️ : '+current['last_updated'].split()[1]+"\nIt’s "+condition['text']+' Now'+sticker[condition['text']]+'\nTemperature 🌡 : '+str(current['temp_c'])+'°C'+'\nFeels Like 🚻 : '+str(current['feelslike_c'])+'°C'+'\nTemperature 🌡 : '+str(current['temp_f'])+'°F'+'\nFeels Like 🚻 : '+str(current['feelslike_f'])+'°F'+'\nWind Speed According To The Latest Update 🌬 : '+str(current['wind_kph'])+'KPH'+'\nWind Speed According To The Latest Update 🌬 : '+str(current['wind_mph'])+'MPH'+'\nWind Direction 🧭 : '+str(current['wind_dir'])+'\nPressure In Inches 🛫 : '+str(current['pressure_in'])+'\nPrecipitation Amount 🌧 : '+str(current['precip_mm'])+'MM'+'\nPrecipitation Amount 🌧 : '+str(current['precip_in'])+' Inches'+'\nHumidity💧: '+str(current['humidity'])+'%'+'\nCloud Cover ☁️ : '+str(current['cloud'])+'%'+'\nVisibility 🛣 : '+str(current['vis_km'])+'KM'+'\nVisibility 🛣 : '+str(current['vis_miles'])+'MPH'+'\nUV ☀️🕶 : '+str(current['uv']))                                                                                                                                                                
+        except : 
+            bot.reply_to(message,'🔴🔴 Make sure the city name you entered is correct 🔴🔴')
+   
+ ```
+* The following code is used to get the local time and date of the location you entered
+```
+ elif message.text == '⌚️🌎 click here to get the local time of your desired location ⌚️🌎' :  
+        try :
+    
+            querystring = {"q":city_name,"days":"3"}
+
+            headers = {
+         "X-RapidAPI-Key": RapidAPI_Key,
+         "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com"
+         }
+
+            response = requests.request("GET", url, headers=headers, params=querystring)
+
+            information_received = json.loads(response.text)
+            current = information_received["current"]
+            location = information_received["location"]
+            condition = current['condition']
+        
+                
+
+            bot.reply_to(message,'Country Name 🌎 : '+location['country']+'\nRegion 🗺 : '+location['region']+'\nCity Name 🏙 : '+location['name']+"\nLocal Time ⌚️ : "+location['localtime'].split()[1]+'\nCalendar 🗓 : '+location['localtime'].split()[0]+"\nIt’s "+condition['text']+' Now'+sticker[condition['text']])
+        except : 
+            bot.reply_to(message,'🔴🔴 Make sure the city name you entered is correct 🔴🔴')
+
+ ```
  
  
  
