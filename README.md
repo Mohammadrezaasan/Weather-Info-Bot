@@ -193,7 +193,21 @@ def handle_text(message):
             bot.reply_to(message,'🔴🔴 Make sure the city name you entered is correct 🔴🔴')
  ```
  
- 
+ ## Keyword guide
+	
+|Keyword names|What can they do?|
+|:---:|------|
+|The name of the desired city :|Saves the desired city name.|
+|🤖 Introducing The Robot 🤖|This key will help you get to know the bot and understand what it can do.|
+|📓 Click here to open the list of keywords for you 📓|You can use this key to open the keyword list.|
+|🔄 Changing the name of the city 🔄|Using this key, you can change the name of the city you want.|
+|🌦 Click here to get current weather conditions 🌦|You can use this key to get the current weather condition.|
+|😎 click here to get the weather forecast 😎|Using this key, a list of keywords will be opened for you, using which you can get the weather forecast.|
+|⏳ Daily Forecast ⏳|Using this key, a list of keywords will be opened for you, with which you can set the weather forecast for the day you want.|
+|🕥 Hourly Daily Forecast 🕥|Using this key, a list of keywords will be opened for you. First, you specify the forecast day and then the list of hours will open for you to enter any hour that is in the list. You will get the weather conditions for the hour you entered.|
+|🌌 Day And Night Times 🌄For Example[ sunrise : 5:55 ]|You can use this key to get information such as Sunrise, Sunset,Moonrise, Moonset, Moon phases, Moonlight.|
+|⌚️🌎 Click here to get the local time of your desired location ⌚️🌎|You can use this key to get the local time of any city and any country|
+
  
  
  
