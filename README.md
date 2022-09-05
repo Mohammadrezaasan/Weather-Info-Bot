@@ -192,7 +192,9 @@ def handle_text(message):
         except : 
             bot.reply_to(message,'🔴🔴 Make sure the city name you entered is correct 🔴🔴')
  ```
+ * <a href="https://github.com/Mohammadrezaasan/Weather-Info-Bot/blob/main/Main.py">Click here to get the full code</a>
  
+ * <a href="https://github.com/Mohammadrezaasan/Weather-Info-Bot/blob/main/weather_info_config.py">Click here to get the config file</a>
  ## Keyword guide
 	
 |Keyword names|What can they do?|
