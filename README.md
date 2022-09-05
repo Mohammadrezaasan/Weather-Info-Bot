@@ -7,6 +7,18 @@
 
 ## <p align="center">Bot API Source : <a href="https://www.weatherapi.com/">Weather Api</a>
 
+## Contents
+
+* [Getting started](#getting-started)
+
+* [Next step](#next-step)
+	
+* [Codes docs](#codes-docs)
+	
+* [Keyword guide](#keyword-guide)
+	
+* [How does the bot respond to keywords?](#how-does-the-bot-respond-to-keywords)
+
 ## Getting started
 
 
