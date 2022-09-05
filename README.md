@@ -223,7 +223,7 @@ def handle_text(message):
 |⌚️🌎 Click here to get the local time of your desired location ⌚️🌎|You can use this key to get the local time of any city and any country|
 
  ## How does the bot respond to keywords?
- |<p align="center"><img src="https://user-images.githubusercontent.com/108104864/188339284-0438f705-3890-4321-bcb2-f0af97978fb6.MOV" width="250" height="500"/>|
+ |<p align="center"><video src="https://user-images.githubusercontent.com/108104864/188339284-0438f705-3890-4321-bcb2-f0af97978fb6.MOV" width="250" height="500"/>|
 |:---:|
 |!!Keywords used in the video!!|
 |The name of the desired city :|Saves the desired city name.|
