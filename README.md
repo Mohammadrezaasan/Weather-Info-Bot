@@ -7,6 +7,7 @@
 ## <p align="center">Bot API Source : <a href="https://www.weatherapi.com/">Weather Api</a>
 
 ## Contents
+* [Languages and Tools used in bot](#languages-and-tools-used-in-bot)
 
 * [Getting started](#getting-started)
 
@@ -18,6 +19,11 @@
 	
 * [How does the bot respond to keywords?](#how-does-the-bot-respond-to-keywords)
 
+## Languages and Tools used in bot
+
+* Python 3.10
+* REST API
+* <a href="https://pypi.org/project/pyTelegramBotAPI/">Telebot Library</a>
 ## Getting started
 
 
