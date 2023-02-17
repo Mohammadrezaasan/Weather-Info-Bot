@@ -22,7 +22,7 @@
 ## Languages and Tools used in bot
 
 * Python 3.10
-* REST API
+* working with Requests
 * <a href="https://pypi.org/project/pyTelegramBotAPI/">Telebot Library</a>
 ## Getting started
 
